@@ -1,0 +1,48 @@
+form{
+    > .zones_inputs{
+      margin-top: 0px;
+      padding: 10px;
+      border: 1px solid #ced4da;
+        .action_buttons{
+            @media (min-width: 961px)
+            {
+              margin-top: 40px;
+            }
+            > .remove_zone.first{
+              display: none;
+            }
+          > .remove_zone{
+            display: inline-block;
+          }
+        }
+
+    } > .zones_inputs ~ .zones_inputs {
+      margin-top: 20px;
+    }
+}
+
+.append_inputs{
+  > .zones_inputs{
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    .action_buttons{
+      @media (min-width: 961px)
+      {
+        margin-top: 40px;
+      }
+      > .remove_zone.first{
+        display: none;
+      }
+      > .remove_zone{
+        display: inline-block;
+      }
+    }
+
+  } > .zones_inputs ~ .zones_inputs {
+      margin-top: 20px;
+    }
+}
+
+
+

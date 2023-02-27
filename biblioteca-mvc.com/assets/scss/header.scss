@@ -1,0 +1,170 @@
+header{
+    margin-bottom: 40px;
+    .header_princ{
+        padding: 20px 0px;
+        @media (max-width:767px) {
+            padding: 15px;
+        }
+        background-color: $fondo_header;
+        color: $fuente_header;
+        h2{
+          //text-transform: capitalize;
+        }
+    }
+    .login_user{
+        background-color: $fondo_login_user;
+        color: $fuente_login_user;
+        .languagesandregister{
+            text-align: right;
+            > ul{
+                @media (min-width: 960px){
+                    margin-right: -1px;
+                }
+            }
+            ul{
+                margin-bottom: 0px;
+                .display_login{
+                    background-color: #B8DBD9;
+                    border: none;
+                    border-radius: 0px;
+                    color: #F4F4F9;
+                    :focus{
+                        box-shadow: none;
+                    }
+                    box-shadow: none !important;
+                }
+            }
+            .languagues_list{
+                li{
+                    a{
+                        color: $blanco_global;
+                        text-decoration: none;
+                    }
+                    a.active,a:hover,a:focus{
+                        color: $active_lang;
+                        font-weight: bold;
+                    }
+                }
+            }
+            .login > .btn{
+                //background-color: #B8DBD9;
+                //border: 1px solid $fondo_btn_login;
+                border: none;
+                border-radius: 0px;
+                color: $blanco_global;
+                :focus{
+                    box-shadow: none;
+                }
+                box-shadow: inset 0 0 0 0 $fondo_btn_login;
+                -webkit-transition: all ease .8s;
+                -moz-transition: all ease .8s;
+                transition: all ease .8s;
+                //box-shadow: none !important;
+            }
+            .login > .btn:hover,.login > .btn.active{
+                border: none;
+                //background-color: $fondo_btn_login;
+                box-shadow: inset 80px 0 0 0 $fondo_btn_login;
+            }
+            .login > form >.btn{
+                border: none;
+                border-radius: 0px;
+                color: $blanco_global;
+                :focus{
+                    box-shadow: none;
+                }
+                box-shadow: inset 0 0 0 0 $fondo_btn_login;
+                -webkit-transition: all ease .8s;
+                -moz-transition: all ease .8s;
+                transition: all ease .8s;
+                background-color: transparent;
+                text-transform: none;
+            }
+            .login > form > .btn:hover,.login > .btn.active{
+                border: none;
+                //background-color: $fondo_btn_login;
+                box-shadow: inset 110px 0 0 0 $fondo_btn_login;
+            }
+
+        }
+        .loginandregister{
+            background-color: $fondo_btn_login;
+            color: $blanco_global;
+            padding: 20px;
+            top: 0px;
+            position: absolute;
+            width: 100%;
+            z-index: 99;
+            right: 15px;
+            @media (min-width: 960px){
+                margin-right: -1px;
+            }
+            @media (max-width:767px) {
+                position: relative;
+                right: 0px;
+            }
+            a{
+                color: $color_btn_standard;
+            }
+            .header_new_user{
+                padding-left: 20px;
+                border-left: 1px solid $blanco_global;
+                height: 100%;
+                p{
+                    font-size: 18px;
+                }
+                @media (max-width:767px) {
+                    border: none;
+                    padding: 0px;
+                }
+            }
+        }
+    }
+
+    .migas{
+        .breadcrumb{
+            background-color: $fondo_breadcrumb;
+            li{
+                a{
+                    color: $color_btn_standard;
+                }
+            }
+        }
+    }
+}
+
+.navbar-standard{
+    background-color: $fondo_nav;
+    .navbar-toggler {
+        color: $navbar-dark-color;
+        border-color: $navbar-dark-toggler-border-color;
+    }
+    .navbar-toggler-icon {
+        background-image: $navbar-dark-toggler-icon-bg;
+    }
+    .navbar-brand {
+        color: $blanco_total;
+    }
+    .navbar-nav{
+        .nav-link{
+            color: $elemento_nav;
+        }
+        .active>.nav-link,.nav-link.active,.nav-link.show,.show>.nav-link{
+            color: $blanco_total;
+        }
+        .nav-link:focus,.nav-link:hover{
+            color: $elemento_nav_hover;
+        }
+        .dropdown-menu{
+            background-color: $fondo_nav;
+            .dropdown-item{
+                color: $elemento_nav;
+            }
+            .dropdown-item:hover,.dropdown-item:focus,.dropdown-item.active{
+                color: $elemento_nav_hover;
+                background-color: transparent;
+            }
+        }
+    }
+
+}

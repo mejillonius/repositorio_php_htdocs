@@ -1,0 +1,11 @@
+footer{
+  margin-top: 100px;
+  .footer_princ{
+    padding: 10px 15px;
+    background-color: $fondo_footer;
+    color: $fuente_footer;
+    p:last-of-type{
+      margin-bottom: 0px;
+    }
+  }
+}

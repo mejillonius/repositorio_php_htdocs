@@ -1,0 +1,17 @@
+#logo{
+    height: 100px;
+    display: inline;
+}
+h1{
+    display: inline;
+}
+.error{
+    border:2px solid red;
+}
+table{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td{
+    border: 1px solid black;
+}

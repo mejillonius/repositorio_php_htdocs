@@ -1,0 +1,85 @@
+// Boostrap
+@import "bootstrap/bootstrap.scss";
+
+// FontAwesome
+@import "fontawesome/font-awesome.scss";
+
+// Plugins
+@import "plugins/datatables/datatables.scss";
+
+// Importar variables del proyecto
+@import "variables.scss";
+
+// Estilos de la web
+@import "header.scss";
+@import "footer.scss";
+
+// Estilos de Formularios
+@import "forms.scss";
+
+.imdisplayed{
+  display: none;
+}
+
+.main_content{
+  min-height: 600px;
+}
+
+.input-group{
+  .input-group-prepend{
+      .input-group-text{
+        min-width: 42px;
+          i{
+            margin: 0 auto;
+          }
+      }
+  }
+}
+
+.btn-standard{
+  background-color: $fondo_btn_standard;
+  border: 1px solid $borde_btn_standard;
+ color: $color_btn_standard;
+}
+
+// Boton to UP
+#boxtoup{
+  display: none;
+  a{
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #586F7C;
+    color: white;
+  }
+}
+
+.message-confirm{
+    margin-top: 15px;
+    border: 2px solid $fondo_btn_login;
+    padding: 25px;
+    p{
+      font-weight: bold;
+      font-size: 16px;
+    }
+  .form-group{
+    margin-bottom: 0px;
+    p{
+      margin-bottom: 0px;
+    }
+  }
+}
+
+.error_windows{
+  background-color: #0000fe;
+  color: white;
+  text-align: center;
+  padding: 30px 50px;
+  h3{
+    text-decoration: underline;
+    margin-bottom: 15px;
+  }
+}
+
+
