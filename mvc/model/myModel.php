@@ -4,7 +4,7 @@
 class Model{
     private $con;
     public function __construct(){
-        require_once(MODEL.'connect2.php');
+        require_once(MODEL.'connect5.php');
         $this->con = $con;
     }
     public function usuarioexists ($usuario){
