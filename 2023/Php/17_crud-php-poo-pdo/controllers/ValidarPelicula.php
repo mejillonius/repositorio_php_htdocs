@@ -4,14 +4,14 @@ class ValidarPelicula
     public function ValidadorPelicula($pelicula)
     {
         $errores = [];
-        $title = $pelicula->getTitle();
+        $title = trim($pelicula->getTitle());
         if (empty($title)) {
-            $errores['title'] = "Campo requerido";
+            $errores['title'] = "Campo titulo requerido";
         }
         //...
-        if () {
+/*         if () {
          
-        }
+        } */
         return $errores;
     }
 }
