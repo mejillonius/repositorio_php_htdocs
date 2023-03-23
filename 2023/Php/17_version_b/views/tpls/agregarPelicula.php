@@ -5,14 +5,19 @@ $bd = new BaseMysql();
 $consulta = new Consulta();
 $validar = new ValidarPelicula();
 
-/* if ($_SERVER['REQUEST_METHOD']==='POST' ) { */
 
+
+/* if ($_SERVER['REQUEST_METHOD']==='POST' ) { */
 if ($_POST) {
 
-    $pelicula = new Pelicula($_POST['title'], $_POST['rating'],  $_POST['awards'], $_POST['release_date'], $_POST['length'], $_POST['genre_id'], $_POST['img']);
+    $pelicula = new Pelicula($_POST['title'], $_POST['rating'],  $_POST['awards'], $_POST['release_date'], $_POST['length'], $_POST['genre_id']);
     $errores = $validar->validadorPelicula($pelicula);
-    if (count($errores) == 0) {
+    $archivo = $validar->subirImagen($_FILES);
+    if (count($errores) == 0 && count($archivo['error']) == 0) {
+        $pelicula->setImg($archivo['archivo']);
         $consulta->guardarPelicula($bd, 'movies', $pelicula);
+    } else {
+        $errores = array_merge($errores, $archivo['error']);
     }
 }
 $generos = $consulta->listarGeneros($bd, 'genres');
@@ -44,7 +49,7 @@ $generos = $consulta->listarGeneros($bd, 'genres');
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
-            <form action="" method="post" enctype="multipart/formdata">
+            <form action="" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="nombrePelicula">Nombre</label>
                     <input type="text" class="form-control" name="title" id="nombrePelicula">

@@ -35,47 +35,53 @@ class ValidarPelicula
             $errores['title'] = "titulo demasiado largo";
         }
 
-
-    
-    if (isset($_FILES['uploadedFile']) && $_FILES['uploadedFile']['error'] === UPLOAD_ERR_OK) {
-
-        // recogemos detalles
-        $fileTmpPath = $_FILES['uploadedFile']['tmp_name'];
-        $fileName = $_FILES['uploadedFile']['name'];
-        $fileSize = $_FILES['uploadedFile']['size'];
-        $fileType = $_FILES['uploadedFile']['type'];
-        $fileNameCmps = explode(".", $fileName);
-        $fileExtension = strtolower(end($fileNameCmps));
-
-        //encriptamos
-        $newFileName = md5($fileName) . '.' . $fileExtension;
-        var_dump($newFileName);
-        // extensiones aceptadas
-        $allowedfileExtensions = array('jpg', 'gif', 'png', 'zip', 'txt', 'xls', 'doc');
-
-        if (in_array($fileExtension, $allowedfileExtensions)) {
-            // directorio donde irá
-            $uploadFileDir = 'uploaded_files/';
-            $dest_path = $uploadFileDir . $newFileName;
-
-        if (move_uploaded_file($fileTmpPath, $dest_path)) {
-            $errores['file'] = 'Archivo subido correctamente.';
-        } else {
-            $errores['file'] = 'Error. Directorio con permisos?.';
-        }
-        } else {
-            $errores['file'] = 'Subida erronea. Extensiones permitidas: ' . implode(',', $allowedfileExtensions);
-        }
-    } else {
-        $errores['file'] = 'Error: .<br>';
-        $errores['file'] .= 'Error:' . $_FILES['uploadedFile']['error'];
-    }
-  
-
-        
         
 
         return $errores;
+    }
+    public function subirImagen($archivo){
+        
+        $errores = [];
+        if ($archivo['img']['error'] === 0) {
+
+            // recogemos detalles
+            $fileTmpPath = $archivo['img']['tmp_name'];
+            $fileName = $archivo['img']['name'];
+            $fileSize = $archivo['img']['size'];
+            $fileType = $archivo['img']['type'];
+            $fileNameCmps = explode(".", $fileName);
+            $fileExtension = strtolower(end($fileNameCmps));
+    
+            //encriptamos
+            $newFileName = md5($fileName) . '.' . $fileExtension;
+            var_dump($newFileName);
+            // extensiones aceptadas
+            $allowedfileExtensions = array('jpg', 'jpeg', 'gif', 'png');
+    
+            if (in_array($fileExtension, $allowedfileExtensions)) {
+                // directorio donde irá
+                $uploadFileDir = 'img/';
+                $dest_path = $uploadFileDir . $newFileName;
+    
+            if (move_uploaded_file($fileTmpPath, $dest_path)) {
+                //$errores['file'] = 'Archivo subido correctamente.';
+            } else {
+                $errores['file'] = 'Error. Directorio con permisos?.';
+            }
+            } else {
+                $errores['file'] = 'Subida erronea. Extensiones permitidas: ' . implode(',', $allowedfileExtensions);
+            }
+        } elseif ($archivo['img']['error'] == 4) {
+            $errores['file'] = 'Error: .<br>';
+            $errores['file'] .= 'Error: No se ha adjuntado ningun archivo de imagen';
+            $newFileName = null;
+        }
+        else {
+            $errores['file'] = 'Error: .<br>';
+            $errores['file'] .= 'Error:' . $archivo['img']['error'];
+            $newFileName = null;
+        }
+        return ['error'=>$errores, 'archivo'=>$newFileName];
     }
 }
 

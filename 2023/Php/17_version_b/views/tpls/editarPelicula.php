@@ -9,10 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $pelicula = new Pelicula($_POST['title'], $_POST['rating'], $_POST['awards'], $_POST['release_date'], $_POST['length'], $_POST['genre_id'], $_POST['img']);
     $errores = $validar->validadorPelicula($pelicula);
+    $archivo = $validar->subirImagen($_FILES);
     //Les recuerdo que el método de validación de errores no está completo, sería bueno que ustdes culminen la validación de todos los campos
 
-    if (count($errores) == 0) {
+    if (count($errores) == 0 && count($archivo['error']) == 0) {
+        $pelicula->setImg($archivo['archivo']);
         $consulta->actualizarPelicula($bd, 'movies', $pelicula, $_GET['id']);
+    } else {
+        $errores = array_merge($errores, $archivo['error']);
     }
 }
 
