@@ -57,7 +57,13 @@ class Consulta
     //Este método controla el borrado de la película que el usuario selecione
     public function borrarpelicula($bd, $movies, $id)
     {
-        $sql = "DELETE FROM $movies WHERE id = :id";
+        $sql = "SELECT img FROM $movies WHERE id = :id ";
+        $query = $bd->prepare($sql);
+        $query->bindvalue(':id', $id);
+        $query->execute();
+        $pelicula = $query->fetch(PDO::FETCH_ASSOC);
+        unlink('img/'.$pelicula['img']);
+        $sql = "DELETE FROM $movies WHERE id = :id ";
         $query = $bd->prepare($sql);
         $query->bindvalue(':id', $id);
         $query->execute();
