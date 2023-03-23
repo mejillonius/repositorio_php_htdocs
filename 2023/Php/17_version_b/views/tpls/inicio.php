@@ -5,10 +5,10 @@ $consulta = new Consulta();
 $validar = new ValidarPelicula();
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET' || ($_GET && !empty(trim('busqueda')))) {
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && ($_GET && !empty(trim('busqueda')))) {
   /* if ($_GET && !empty(trim('busqueda'))) { */
-/*   $peliculas = $consulta->buscarPelicula($bd, 'movies', $_GET['busqueda']);
-} else { */
+   $peliculas = $consulta->buscarPelicula($bd, 'movies', $_GET['busqueda']);
+} else {
   $peliculas = $consulta->listarPeliculas($bd, 'movies');
 }
 
