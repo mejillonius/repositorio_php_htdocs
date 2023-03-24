@@ -7,14 +7,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //Esto se ejecuta univcamente cuando el usuario acciona el boton de Actualizar Película  
 
 
-    $pelicula = new Pelicula($_POST['title'], $_POST['rating'], $_POST['awards'], $_POST['release_date'], $_POST['length'], $_POST['genre_id'], $_POST['img']);
+    $pelicula = new Pelicula($_POST['title'], $_POST['rating'], $_POST['awards'], $_POST['release_date'], $_POST['length'], $_POST['genre_id']);
     $errores = $validar->validadorPelicula($pelicula);
     $archivo = $validar->subirImagen($_FILES);
     //Les recuerdo que el método de validación de errores no está completo, sería bueno que ustdes culminen la validación de todos los campos
 
-    if (count($errores) == 0 && count($archivo['error']) == 0) {
-        $pelicula->setImg($archivo['archivo']);
+    if (count($errores) == 0) {
+        if ( count($archivo['error']) == 0){
+            $pelicula->setImg($archivo['archivo']);
+        } elseif ($archivo['archivo'] == null) {
+            $movie = $consulta->detallePelicula($bd, 'movies', 'genres', $_GET['id']);
+            $pelicula->setImg($movie['img']);
+        } 
         $consulta->actualizarPelicula($bd, 'movies', $pelicula, $_GET['id']);
+        header("Refresh:2 location:".url_base);
     } else {
         $errores = array_merge($errores, $archivo['error']);
     }
@@ -32,7 +38,8 @@ $movie = $consulta->detallePelicula($bd, 'movies', 'genres', $_GET['id']);
     <div class="row mt-5">
 
         <div class="col-lg-8 offset-lg-2">
-            <form action="" method="post" enctype="multipart/formdata">
+            <form action="" method="post" enctype="multipart/form-data">
+            <img class="card-img-top" src="<?= url_base.'img/'.$movie['img'] ?>" alt="Foto de la pelicula">
                 <div class="form-group">
                     <label for="nombrePelicula">Nombre</label>
                     <input type="text" class="form-control" name="title" id="nombrePelicula" value="<?= $movie['title']; ?>">
@@ -67,7 +74,7 @@ $movie = $consulta->detallePelicula($bd, 'movies', 'genres', $_GET['id']);
                 </div>
                 <div class="form-group">
                     <label for="imagenPelicula">Poster</label>
-                    <input type="file" class="form-control" name="img" id="imagenPelicula" value="<?= $movie['img']; ?>">
+                    <input type="file" class="form-control" name="img" id="imagenPelicula" >
                 </div>
                 <button type="submit" class="btn btn-primary">Actualizar Película</button>
             </form>
