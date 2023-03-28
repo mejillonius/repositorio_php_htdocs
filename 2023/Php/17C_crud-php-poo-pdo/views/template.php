@@ -24,7 +24,7 @@ require_once 'loader.php';
                 </a>
             </div>
         </div>
-
+        
         <div class="container">
 
             <ul class="nav nav-justified py-2 nav-pills">
@@ -75,6 +75,15 @@ require_once 'loader.php';
                         <a class="nav-link" href="<?= url_base ?>">Inicio</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= url_base ?>registro/">registro</a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= url_base ?>login/">login</a>
+                    </li>
+
                 <?php endif ?>
 
             </ul>
@@ -100,7 +109,10 @@ require_once 'loader.php';
                     $rutas[0] == "agregarPelicula" ||
                     $rutas[0] == "detallePelicula" ||
                     $rutas[0] == "editarPelicula" ||
-                    $rutas[0] == "borrarPelicula"
+                    $rutas[0] == "borrarPelicula" ||
+                    $rutas[0] == "login" ||
+                    $rutas[0] == "registro"
+                    
                 ) {
                     include "tpls/" . $rutas[0] . ".php";
                 } else {

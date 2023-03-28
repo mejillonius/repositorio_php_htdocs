@@ -6,8 +6,8 @@ class MdlUser {
     {
         $sql = "SELECT * FROM $tabla WHERE username = :username AND email = :email";
         $query = $db->prepare($sql);
-        $query->bindVale(":username", $registro->getUsername());
-        $query->bindVale(":email", $registro->getEmail());
+        $query->bindValue(":username", $registro->getUsername());
+        $query->bindValue(":email", $registro->getEmail());
         $query->execute();
 
         $user = $query->fetch(PDO::FETCH_ASSOC);
@@ -21,12 +21,12 @@ class MdlUser {
             $password = PwHash::encryptPw($registro->getPassword());
             //guardamos en la base de datos los valores entrados en formulario
 
-            $sql = "insert into usuarios(username, password, rol_id, email VALUES (:username, :password, :rol_id, :email)";
+            $sql = "INSERT INTO usuarios(username, password, rol_id, email) VALUES (:username, :password, :rol_id, :email)";
             $query = $db->prepare($sql);
-            $query->bindVale(":username", $registro->getUsername(), PDO::PARAM_STR);
-            $query->bindVale(":password", $password, PDO::PARAM_STR);
-            $query->bindVale(":rol_id", $registro->getRol(), PDO::PARAM_INT);
-            $query->bindVale(":email", $registro->getEmail(), PDO::PARAM_STR);
+            $query->bindValue(":username", $registro->getUsername(), PDO::PARAM_STR);
+            $query->bindValue(":password", $password, PDO::PARAM_STR);
+            $query->bindValue(":rol_id", $registro->getRol(), PDO::PARAM_INT);
+            $query->bindValue(":email", $registro->getEmail(), PDO::PARAM_STR);
             $query->execute();
 
             if($query){
@@ -36,6 +36,14 @@ class MdlUser {
             
         }
 
+    }
+
+    public function loguear ($db, $tabla, $logueo){
+        $sql = "SELECT * FROM $tabla WHERE username = :username AND email = :email";
+        $query = $db->prepare($sql);
+        $query->bindValue(":username", $logueo->getUsername());
+        $query->bindValue(":email", $logueo->getEmail());  
+        $query->execute();     
     }
 
 
