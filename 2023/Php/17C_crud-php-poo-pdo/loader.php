@@ -21,6 +21,7 @@ spl_autoload_register("incluirClasses");
 $bd = new BaseMysql();
 $consulta = new Consulta();
 $validar = new ValidarPelicula();
+$validarUser = new ValidarUser();
 
 $tpl = new MontaTpls();
 $tpl->montaTpls();

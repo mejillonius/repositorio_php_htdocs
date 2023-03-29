@@ -50,10 +50,10 @@ class ValidarUser
     }
 
     public function validadorLogin ($logueo){
-        
+
         $errores = [];
 
-        $username = trim($logueo->getUserame());
+        $username = trim($logueo->getUsername());
         if (empty($username)) {
             $errores['username'] = "usuario: Campo requerido";
         } 

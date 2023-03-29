@@ -43,7 +43,34 @@ class MdlUser {
         $query = $db->prepare($sql);
         $query->bindValue(":username", $logueo->getUsername());
         $query->bindValue(":email", $logueo->getEmail());  
-        $query->execute();     
+        $query->execute();   
+        $loguser  = $query->fetch(PDO::FETCH_ASSOC);
+        if($loguser){
+
+            $password = $logueo->getPassword();
+            var_dump($loguser);
+            $pwbd = $loguser['password'];
+
+            $pwMatch = PwHash::decryptPw($password, $pwbd);
+            var_dump($pwMatch);
+            sleep(2);
+
+            if ($pwMatch){
+                echo('si password match');
+                $rol = $loguser['rol_id'];
+                session_start();
+                $_SESSION['rol'] = $rol;
+                Autenticador::iniciarSesion();
+            } else {
+                return false;
+            }
+            
+            echo("no password match");
+            var_dump($loguser);
+            header("refresh:10;url=".url_base."registro/");
+        } else {
+            header("refresh:10;url=".url_base);
+        }
     }
 
 

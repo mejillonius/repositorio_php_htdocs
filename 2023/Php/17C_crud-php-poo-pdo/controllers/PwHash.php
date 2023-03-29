@@ -9,7 +9,7 @@ class PwHash {
     }
 
     //funcion para verificar si la password hasheada coincide con el registro
-    static public function dectyptPw($password, $bdd)
+    static public function decryptPw($password, $bdd)
     {
         return password_verify($password, $bdd);
     }
