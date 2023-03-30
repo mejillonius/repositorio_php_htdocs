@@ -1,0 +1,88 @@
+<html>
+
+<head>
+      <title>Test Ajax </title>
+      <style>
+            #waiting {
+                  position: absolute;
+                  width: 100%;
+                  top: -1px;
+                  display: none;
+                  text-align: center;
+            }
+
+            #waiting div {
+                  display: inline-block;
+                  background-color: #fff;
+                  padding: 10px;
+                  border: 1px solid black;
+                  vertical-align: middle;
+            }
+
+            .tecla {
+                  display: inline-block;
+                  padding: 4px 10px;
+                  background-color: #ccc;
+                  border: 2px outset #fff;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  margin: 2px;
+            }
+
+            #results {
+                  border: 1px solid black;
+                  background-color: yellow;
+                  padding: 5px;
+            }
+      </style>
+      <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+</head>
+
+<body>
+      <div id='waiting'>
+            <div><img src='imgs/spinner.gif' valign="middle" /> Loading...</div>
+      </div>
+      <div class='tecla' id='btnEnviar'>Send</div>
+      <div id='results'>Results here...</div>
+      <script> 
+      $(function () {
+            $("#btnEnviar").click(function(){
+                  $('waiting').slideDown("fast");
+
+                  $.ajax({
+                        url:"server/server-xml.php",
+                        method:"POST",
+                        data:{
+                              query:"//mondial/country/name"
+                        },
+                        success:function(data){
+                              $('#waiting').slideUp("fast");
+                              let xml = $.parseXML(data);
+                              xml = $(xml);
+                              let results = xml.find('results');
+
+                              let html = `<table>`;
+                              
+                                    $.each(results.find('result'),
+                                    function(index,value) {
+                                          let res = $(value);
+                                          let name = res.text();
+                                          console.log(name);
+                                          html += `<tr><td>${index}</td><td>${name}</td></tr>`;
+                                    });
+                                    html += `</table>`;
+                                    $("#results").html(`<pre><code> resultado:${html} </code></pre>`);
+                        },
+
+                        error: function() {
+                              $('#waiting').slideUp("fast");
+                              $("#results").html(`<pre><code> error en la peticion </code></pre>`);
+                        }
+                  })
+            })
+
+      })</script>
+</body>
+
+</html>
