@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <title>Test Ajax </title>
+    <style>
+        #waiting {
+            position: absolute;
+            width: 100%;
+            top: -1px;
+            display: none;
+            text-align: center;
+        }
+
+        #waiting div {
+            display: inline-block;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid black;
+            vertical-align: middle;
+        }
+
+        .tecla {
+            display: inline-block;
+            padding: 4px 10px;
+            background-color: #ccc;
+            border: 2px outset #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 2px;
+        }
+
+        #results {
+            border: 1px solid black;
+            background-color: yellow;
+            padding: 5px;
+        }
+    </style>
+    <script src='http://code.jquery.com/jquery-latest.js'></script>
+
+</head>
+
+<body>
+    <div id='waiting'>
+        <div><img src='imgs/spinner.gif' valign="middle" /> Loading...</div>
+    </div>
+    <div class='tecla' id='btnEnviar'>Send</div>
+    <div id='results'>Results here...</div>
+    <script>
+        $(function () {
+
+            $("#btnEnviar").click(function () {
+                $("#waiting").slideDown('fast');
+                $.ajax({
+                    url: "server/server-json.php",
+                    method: "POST",
+                    data: { id: Math.floor(Math.random() * 10) },
+
+                    success: function (data) {
+                        let info = $.parseJSON(data);
+                        $("#waiting").slideUp('fast');
+                        $("#results").html("<pre><code>" + info.id + " is " + info.text + "</code></pre>");
+                    },
+                    error: function () {
+                        $("#waiting").slideUp('fast');
+                        $("#results").html("<pre><code> ERRORUMSS!! </code></pre>");
+                    }
+
+                });
+
+            });
+
+        });
+    </script>
+</body>
+
+</html>
