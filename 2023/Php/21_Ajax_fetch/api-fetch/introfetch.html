@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro básica Api Fetch</title>
+</head>
+
+<body>
+    <div id="content"></div>
+    <button id="btn">Cargar de un txt externo</button>
+
+    <script>
+        let contenido = document.querySelector('#content');
+        document.addEventListener('DOMContentLoaded', llamarFetch);
+
+        function llamarFetch() {
+            document.getElementById('btn').addEventListener('click', function () {
+                fetch("pruba.txt")
+
+                    .then(conexionOK)
+                    .catch(conexionERROR);
+            })
+        }
+
+        function conexionERROR(error) {
+            console.log("Response: ", error);
+            contenido.innerHTML = `Respuesta: ${error}`;
+        }
+
+        function conexionOK(response) {
+            console.log("Respuesta:", response);
+            if (response.ok) {
+                response.text()
+                    .then(muestra)
+            } else {
+                conexionERROR(response.status);
+            }
+        }
+
+        function muestra(txt) {
+            contenido.innerHTML = `${txt}`;
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
