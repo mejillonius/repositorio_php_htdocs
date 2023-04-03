@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejemplo de fetch desde un servidor</title>
+</head>
+<body>
+    <button id="btn">Cargar de un txt externo</button>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Estado</th>
+                </tr>
+            </thead>
+            <tbody id="content">
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let contenido = document.querySelector('#content');
+        document.querySelector('#btn').addEventListener('click', () => {
+            fetch("server/posts.php")
+            .then(response => response.json())
+            .then(response => {
+                let html ='';
+                for(let valor of response) {
+                    html += `<tr> 
+                        <td scope="row">${valor.id}</td>
+                        <td scope="row">${valor.nombre}</td>
+                        <td scope="row">${valor.email}</td>
+                        <td scope="row">${valor.estado ? "activo" : "inactivo" }</td>
+                        </tr>`
+                }
+                console.log(html);
+                contenido.innerHTML = html;
+            })
+        })
+
+
+    </script>
+
+</body>
+</html>

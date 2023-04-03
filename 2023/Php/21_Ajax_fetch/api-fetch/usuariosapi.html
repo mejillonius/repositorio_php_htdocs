@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejemplo de fetch desde un servidor</title>
+</head>
+<body>
+    <button id="btnUno">Cargar un usuario</button>
+    <div id="contentUno"></div>
+    <button id="btnTodos">Cargar varios usuarios</button>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Avatar</th>
+                </tr>
+            </thead>
+            <tbody id="content">
+
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        let contenido = document.querySelector('#content');
+        let contenidoUno = document.querySelector('#contentUno');
+
+        const inicializar = () => {
+        document.querySelector('#btnUno').addEventListener('click', usuario);
+        document.querySelector('#btnTodos').addEventListener('click', usuarios);
+        }
+        
+        document.addEventListener("DOMContentLoaded", inicializar);
+
+        const usuario = () => {
+            Swal.fire({
+                title: 'Cargar un usuario?',
+                showCancelButton: true,
+                confirmButtonText: 'Cargar',
+                denyButtonText: `No Cargar`,
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    fetch('https://randomuser.me/api/')
+                    .then(res => res.json())
+                    .then(res => {
+                
+                    console.log(res);
+                    let html =`<img src="${res.results[0].picture.large}" width="50">
+                                <h4>Nombre: ${res.results[0].name.first} </h4>
+                                <h4>Email: ${res.results[0].email} </h4>
+                                `;
+                    console.log(html);
+                    contenidoUno.innerHTML = html;
+                
+                     })
+                } else if (result.isDenied) {
+                    Swal.fire('NO se cargara el usuario', '', 'info')
+                }
+            })
+
+        }
+
+        const usuarios = () => {
+            fetch('https://randomuser.me/api/?results=50')
+            .then(response => response.json())
+            .then(response => {
+                
+                let html ='';
+                let i = 1
+                for(let valor of response.results) {
+                    html += `<tr> 
+                        <th>${i}</th>
+                        <td scope="row">${valor.name.first}</td>
+                        <td scope="row">${valor.email}</td>
+                        <td scope="row">${valor.dob.age}</td>
+                        <td scope="row"><img src="${valor.picture.large}" width="50"></td>
+                        </tr>`;
+                        i++;
+                }
+                
+                console.log(html);
+                contenido.innerHTML = html;
+            }
+        )}
+
+
+
+
+    </script>
+
+</body>
+</html>
