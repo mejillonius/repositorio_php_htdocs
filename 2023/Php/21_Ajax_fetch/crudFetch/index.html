@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD php - API fetch</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <h3>Registro de productos</h3>
+                    </div>
+                    <div>
+                        <form action="" method="post" id="frm">
+                            <div>
+                                <label for="">Código</label>
+                                <input type="hidden" name="idp" id="idp" value="">
+                                <input type="text" name="codigo" id="codigo" placeholder="Código">
+                            </div>
+                            <div>
+                                <label for="">Producto</label>
+                                <input type="text" name="producto" id="producto" placeholder="Descripción">
+                            </div>
+                            <div>
+                                <label for="">Precio</label>
+                                <input type="text" name="precio" id="precio" placeholder="Precio">
+                            </div>
+                            <div>
+                                <label for="">Cantidad</label>
+                                <input type="text" name="cantidad" id="cantidad" placeholder="cantidad">
+                            </div>
+                            <div>
+                                <input type="button" value="Registrar" id="registrar">
+                                <input type="hidden" value="Crear Nuevo Producto" id="nuevoProducto">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="row">
+                    <div>
+                        <form action="" method="post">
+                            <div>
+                                <label for="buscar">Buscar:</label>
+                                <input type="text" name="buscar" id="buscar" placeholder="Buscar...">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultado">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- carreguem el sweet alert per mostrar missatges de control a través de pantalla -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
