@@ -35,8 +35,8 @@ class MdlUser
                         //iniciamos sesión
                         session_start();
                         $_SESSION['rol'] = $rol;
-                        var_dump($rol);
-                        var_dump($_SESSION);
+/*                         var_dump($rol);
+                        var_dump($_SESSION); */
                         header("location: ../pelisSinUsers/index.php ");
                         
                   }

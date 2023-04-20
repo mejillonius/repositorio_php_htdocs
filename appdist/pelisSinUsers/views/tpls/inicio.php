@@ -3,7 +3,10 @@
 $bd = new BaseMysql();
 $consulta = new Consulta();
 $validar = new ValidarPelicula();
-
+if(!isset($_SESSION['rol'])){
+	$_SESSION['rol']=3;
+}
+var_dump($_SESSION['rol']);
 
 
 
@@ -12,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && (isset($_GET['busqueda']))) {
 } else {
 	$peliculas = $consulta->listarPeliculas($bd, 'movies');
 }
+
 ?>
 <nav class="container bg-light">
 	<div class="container">
@@ -21,7 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && (isset($_GET['busqueda']))) {
 
 
 			<li class="nav-item">
-				<a class="nav-link" href="<?= url_inici ?>agregarPelicula/">Agregar Película</a>
+				<?php if ($_SESSION['rol'] == 1) {
+					echo ("<a class='nav-link' href=" . url_inici . "agregarPelicula/ >Agregar Película</a>");
+				} ?>
+			</li>
+			<li class="nav-item">
+				<form action="./controllers/logout.php">
+					<button type="submit">logout</button>
+				</form>
 			</li>
 
 
@@ -54,15 +65,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && (isset($_GET['busqueda']))) {
 			<tr>
 				<td><?= $value['id']; ?></td>
 				<td><?= $value['title']; ?></td>
-				<td><a href="<?= url_inici ?>detallePelicula/<?= $value['id']; ?>">
+				<td>
+					<a href="<?= url_inici ?>detallePelicula/<?= $value['id']; ?>">
 						<ion-icon name="eye"></ion-icon>
-					</a></td>
-				<td><a href="<?= url_inici  ?>editarPelicula/<?= $value['id']; ?>">
-						<ion-icon name="create"></ion-icon>
-					</a></td>
-				<td><a href="<?= url_inici ?>borrarPelicula/<?= $value['id']; ?>">
-						<ion-icon name="trash"></ion-icon>
-				</td></a>
+					</a>
+				</td>
+				<td>
+					<?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+						echo ('<a href="' . url_inici . 'editarPelicula/' . $value['id'] . '">' .
+							'<ion-icon name="create"></ion-icon>' .
+							'</a>'
+						);
+					} ?>
+				</td>
+				<td>
+					<?php if ($_SESSION['rol'] == 1) {
+						echo ('<a href="' . url_inici . 'borrarPelicula/' . $value['id'] . '">' .
+							'<ion-icon name="trash"></ion-icon>' .
+							'</a>'
+						);
+					};
+					?>
+				</td>
 			</tr>
 
 		<?php endforeach; ?>

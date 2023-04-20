@@ -1,7 +1,7 @@
--- Active: 1675263799721@@127.0.0.1@3308@almacen
+-- Active: 1675263800707@@127.0.0.1@3306@moviesbd
 
 
-
+DROP DATABASE IF EXISTS `moviesbd`;
 CREATE DATABASE moviesbd DEFAULT CHARACTER SET = 'utf8mb4';
 
 USE moviesbd;
@@ -25,14 +25,6 @@ CREATE TABLE
         UNIQUE KEY `genres_ranking_unique` (`ranking`)
     ) ENGINE = InnoDB AUTO_INCREMENT = 13 DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci;
 
-/*!40101 SET character_set_client = @saved_cs_client */
-
-;
-
-
-/*!40000 ALTER TABLE `genres` DISABLE KEYS */
-
-;
 
 INSERT INTO `genres`
 VALUES (
@@ -107,7 +99,7 @@ VALUES (
         1
     );
 
-/*!40000 ALTER TABLE `genres` ENABLE KEYS */
+
 
 
 CREATE TABLE
@@ -125,7 +117,7 @@ CREATE TABLE
         CONSTRAINT `movies_genre_id_foreign` FOREIGN KEY (`genre_id`) REFERENCES `genres` (`id`)
     ) ENGINE = InnoDB AUTO_INCREMENT = 22 DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci;
 
-/*!40101 SET character_set_client = @saved_cs_client */
+
 
 
 INSERT INTO `movies`

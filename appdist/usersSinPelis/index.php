@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             MdlUser::loguear($bd, 'usuarios', $logueo);
       }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
