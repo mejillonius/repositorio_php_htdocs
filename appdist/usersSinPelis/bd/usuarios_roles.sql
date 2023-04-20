@@ -1,4 +1,4 @@
--- Active: 1675263799721@@127.0.0.1@3308@moviesbd
+-- Active: 1675263800707@@127.0.0.1@3306@proyecto
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Database: `usuarios_roles`
 
 --
-
+DROP DATABASE IF EXISTS `usuarios_roles`;
 CREATE DATABASE usuarios_roles DEFAULT CHARACTER SET = 'utf8mb4';
 
 -- --------------------------------------------------------
@@ -188,15 +188,3 @@ ADD
     CONSTRAINT `forana` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`);
 
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */
-
-;
-
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */
-
-;
-
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */
-
-;

@@ -36,7 +36,9 @@ class MdlUser
                         session_start();
                         $_SESSION['rol'] = $rol;
                         var_dump($rol);
-                        /*   header("location: ../..../.../ruta a la otra parte"); */
+                        var_dump($_SESSION);
+                        header("location: ../pelisSinUsers/index.php ");
+                        
                   }
             }
       }

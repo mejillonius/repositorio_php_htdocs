@@ -1,5 +1,8 @@
 <?php
 require_once("conf/conf.php");
+if (isset($_SESSION)==false) {
+      session_start();
+}
 
 function incluirClasses($nomClase)
 {
@@ -26,3 +29,5 @@ $validar = new ValidarPelicula();
 
 $tpl = new MontaTpls();
 $tpl->montaTpls();
+
+var_dump($_SESSION);
