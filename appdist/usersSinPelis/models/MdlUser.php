@@ -72,6 +72,9 @@ class MdlUser
                   $query->bindValue(':email', $registro->getEmail(), PDO::PARAM_STR);
                   $query->execute();
                   if ($query) {
+                        /*
+                        * si el usuario esta bien autenticado, se le asigna el rol adecuado y saltamos a la otra pagina
+                        */
                         header('Refresh:5;url=' . url_inici . "login/");
                   }
             }

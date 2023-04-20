@@ -1,7 +1,17 @@
 <?php
 class Consulta
 {
-    //Este método muestra el listatdo de todas las películas
+    /**
+     * Este método muestra el listatdo de todas las películas
+     *
+     * @author	Alberto Galarzo
+     * @since	v0.0.1
+     * @version	v1.0.0	Thursday, April 20th, 2023.
+     * @access	public
+     * @param	mixed	$bd    	base de datos donde mirar
+     * @param	mixed	$movies	tabla donde mirar
+     * @return	mixed devuelve un array de resultados
+     */
     public function listarPeliculas($bd, $movies)
     {
         $sql = "SELECT* FROM $movies";
@@ -10,7 +20,17 @@ class Consulta
         $peliculas = $query->fetchAll(PDO::FETCH_ASSOC);
         return $peliculas;
     }
-    //Método para listar los generos, estos son usudados luego tanto en agregar como en editar películas
+    /**
+     * Método para listar los generos, estos son usudados luego tanto en agregar como en editar películas
+     *
+     * @author	Alberto Galarzo
+     * @since	v0.0.1
+     * @version	v1.0.0	Thursday, April 20th, 2023.
+     * @access	public
+     * @param	mixed	$bd    	base de datos donde mirar
+     * @param	mixed	$genres	 tabla donde mirar
+     * @return	mixed devuelve un array de resultados
+     */
     public function listarGeneros($bd, $genres)
     {
         $sql = "SELECT * FROM $genres";
@@ -19,7 +39,18 @@ class Consulta
         $generos = $query->fetchAll(PDO::FETCH_ASSOC);
         return $generos;
     }
-    //Método para agregar una nueva película
+    /**
+     * Método para agregar una nueva película
+     *
+     * @author	Alberto Galarzo
+     * @since	v0.0.1
+     * @version	v1.0.0	Thursday, April 20th, 2023.
+     * @access	public
+     * @param	mixed	$bd      	base de datos donde guardar
+     * @param	mixed	$movies  	tabla donde guardar
+     * @param	mixed	$pelicula	objeto pelicula
+     * @return	void
+     */
     public function guardarPelicula($bd, $movies, $pelicula)
     {
 
@@ -36,7 +67,19 @@ class Consulta
         $query->execute();
         header('location:' . url_inici);
     }
-    //Este método muestra el detalle de una película selecciona de la lista por parte del usuario
+    /**
+     * Este método muestra el detalle de una película selecciona de la lista por parte del usuario
+     *
+     * @author	Alberto Galarzo
+     * @since	v0.0.1
+     * @version	v1.0.0	Thursday, April 20th, 2023.
+     * @access	public
+     * @param	mixed	$bd    	base de datos deonde mirar
+     * @param	mixed	$movies	tabla deonde mirar
+     * @param	mixed	$genres	tabla de generos
+     * @param	mixed	$id    	id de la pelicula
+     * @return	mixed   devuelve un array de resultados
+     */
     public function detallePelicula($bd, $movies, $genres, $id)
     {
         $sql = "SELECT $movies.* , $genres.name FROM $movies,$genres WHERE $movies.genre_id =$genres.id AND $movies.id = $id";
@@ -46,7 +89,18 @@ class Consulta
 
         return $pelicula;
     }
-    //Este es el método que controla la busqueda de las películas
+    /**
+     * Este es el método que controla la busqueda de las películas
+     *
+     * @author	Alberto Galarzo
+     * @since	v0.0.1
+     * @version	v1.0.0	Thursday, April 20th, 2023.
+     * @access	public
+     * @param	mixed	$bd      	base de datos donde mirar
+     * @param	mixed	$tabla   	tabla donde mirar
+     * @param	mixed	$busqueda	termino de busqueda
+     * @return	mixed   devuelve un array de resultados
+     */
     public function buscarPelicula($bd, $tabla, $busqueda)
     {
         $sql = "SELECT * FROM $tabla WHERE title LIKE :busqueda";
@@ -57,7 +111,18 @@ class Consulta
 
         return $peliculas . header('location:' . url_inici);
     }
-    //Este método controla el borrado de la película que el usuario selecione
+    /**
+     * Este método controla el borrado de la película que el usuario selecione
+     *
+     * @author	Alberto Galarzo
+     * @since	v0.0.1
+     * @version	v1.0.0	Thursday, April 20th, 2023.
+     * @access	public
+     * @param	mixed	$bd    	base de datos donde borrar
+     * @param	mixed	$movies	tabla donde borrar
+     * @param	mixed	$id    	id de la pelicula
+     * @return	void
+     */
     public function borrarpelicula($bd, $movies, $id)
     {
         /*  Eliminación de la img asociada al id del personaje: */
@@ -76,7 +141,19 @@ class Consulta
         $query->bindvalue(':id', $id);
         $query->execute();
     }
-    //Método para realizar la edición o modificación de los datos de alguna película
+    /**
+     * Método para realizar la edición o modificación de los datos de alguna película
+     *
+     * @author	Alberto Galarzo
+     * @since	v0.0.1
+     * @version	v1.0.0	Thursday, April 20th, 2023.
+     * @access	public
+     * @param	mixed	$bd      	base de datos donde mirar
+     * @param	mixed	$movies  	tabla donde mirar
+     * @param	mixed	$pelicula	objeto pelicula
+     * @param	mixed	$id      	id de la pelicula a actualizar
+     * @return	void
+     */
     public function actualizarPelicula($bd, $movies, $pelicula, $id)
     {
         if ($pelicula->getImg() == null) {

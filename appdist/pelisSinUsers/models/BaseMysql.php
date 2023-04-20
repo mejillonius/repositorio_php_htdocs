@@ -1,6 +1,15 @@
 <?php
 
 
+/**
+ * BaseMysql.
+ *
+ * @author	Alberto Galarzo
+ * @since	v0.0.1
+ * @version	v1.0.0	Thursday, April 20th, 2023.
+ * @see		PDO
+ * @global
+ */
 class BaseMysql extends PDO
 {
     private $typedb = "mysql";

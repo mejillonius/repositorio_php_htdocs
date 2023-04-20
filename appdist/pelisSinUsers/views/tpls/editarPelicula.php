@@ -1,6 +1,13 @@
 <?php
 $bd = new BaseMysql();
 $consulta = new Consulta();
+
+/*
+* failsafe para evitar que usuarios no autorizados editen peliculas
+*/
+if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) {
+    header('Refresh:5;url=' .'//' . $_SERVER['SERVER_NAME'] . '/appdist/usersSinPelis/');
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $pelicula = new Pelicula($_POST['title'], $_POST['rating'], $_POST['awards'], $_POST['release_date'], $_POST['length'], $_POST['genre_id'], $_POST['img']);

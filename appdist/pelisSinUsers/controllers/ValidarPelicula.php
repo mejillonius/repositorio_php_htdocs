@@ -1,8 +1,28 @@
 <?php
 
 
+/**
+ * ValidarPelicula.
+ *
+ * @author	Alberto Galarzo
+ * @since	v0.0.1
+ * @version	v1.0.0	Thursday, April 20th, 2023.
+ * @global
+ */
 class ValidarPelicula
 {
+    /**
+     * validadorPelicula.
+     * 
+     * se encarga de validar que los campos de la pelicula sean correctos
+     *
+     * @author	Alberto Galarzo
+     * @since	v0.0.1
+     * @version	v1.0.0	Thursday, April 20th, 2023.
+     * @access	public
+     * @param	mixed	$pelicula	objeto del tipo pelicula
+     * @return	mixed devuelve un array de strings con los errores que han surgido al validar
+     */
     public function validadorPelicula($pelicula)
     {
         $errores = [];
@@ -23,6 +43,18 @@ class ValidarPelicula
 
         return $errores;
     }
+    /**
+     * controllerImg.
+     *
+     * se encarga de subir y agregar la imagen de la pelicula al servidor y validarla
+     * 
+     * @author	Alberto Galarzo
+     * @since	v0.0.1
+     * @version	v1.0.0	Thursday, April 20th, 2023.
+     * @access	public
+     * @param	mixed	$pelicula	objeto pelicula
+     * @return	void
+     */
     public function controllerImg($pelicula)
     {
 

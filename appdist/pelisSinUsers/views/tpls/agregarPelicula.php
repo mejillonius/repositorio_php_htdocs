@@ -2,6 +2,12 @@
 $bd = new BaseMysql();
 $consulta = new Consulta();
 
+/*
+* failsafe para evitar que usuarios no autorizados agreguen peliculas
+*/
+if ($_SESSION['rol'] == 1 ) {
+    header('Refresh:5;url=' .'//' . $_SERVER['SERVER_NAME'] . '/appdist/usersSinPelis/');
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 

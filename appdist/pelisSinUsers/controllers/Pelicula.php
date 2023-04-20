@@ -10,6 +10,22 @@ class Pelicula
     private $id;
     private $img;
 
+    /**
+     * __construct.
+     *
+     * @author	Alberto Galarzo
+     * @since	v0.0.1
+     * @version	v1.0.0	Thursday, April 20th, 2023.
+     * @access	public
+     * @param	mixed	$title    titulo de la pelicula   	
+     * @param	mixed	$rating   nota de la pelicula   	
+     * @param	mixed	$awards      	premios de la pelicula
+     * @param	mixed	$release_date	fecha de estreno de la pelicula
+     * @param	mixed	$length      	duracion de la pelicula
+     * @param	mixed	$genre_id    	genero de la pelicula, ha de estar dentro de los generos definidos dentro de la tabla de generos
+     * @param	mixed	$img         	Default: null poster de la pelicula
+     * @return	void
+     */
     public function __construct($title, $rating, $awards, $release_date, $length, $genre_id, $img = null)
     {
         $this->title = $title;
